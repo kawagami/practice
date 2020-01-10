@@ -3,6 +3,18 @@
 import pyperclip
 import datetime
 import time
+import requests
+import bs4
+
+
+def f2_show_website_file_name(target_website):
+    # 顯示在copy_list的檔案名稱
+    htmlfile = requests.get(target_website)
+    if htmlfile.status_code == 200:
+        soup = bs4.BeautifulSoup(htmlfile.text, 'lxml')
+        print(soup.h2.text)
+    else:
+        print("error!")
 
 
 def f1_copy_website(copy_list):
@@ -23,10 +35,14 @@ def f1_copy_website(copy_list):
     while datetime.datetime.now() < ten_second_after:
         if pyperclip.paste() in copy_list:
             pass
-        else:
+        # 檢查是否wnacg的網址
+        elif "wnacg" in pyperclip.paste():
             copy_list.append(pyperclip.paste())
             print(pyperclip.paste(), "加入列表")
-        time.sleep(0.2)
+            # 將最新加入的網址資訊顯示
+            f2_show_website_file_name(copy_list[-1])
+        time.sleep(0.1)
+        # print(ten_second_after-datetime.datetime.now())
     # 當函數結束時顯示字串
     print("複製網址結束")
 
@@ -34,12 +50,7 @@ def f1_copy_website(copy_list):
 # global copy_list
 target_website = list()
 f1_copy_website(target_website)
-print(target_website)
-
-
-def f2_show_website_file_name():
-    # 顯示在copy_list的檔案名稱
-    pass
+# print(target_website)
 
 
 def f3_path1_check_direct_download():

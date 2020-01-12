@@ -5,6 +5,10 @@ import datetime
 import time
 import requests
 import bs4
+import winsound
+duration = 300  # millisecond
+freq = 440  # Hz
+
 
 
 def f2_show_website_file_name(target_website):
@@ -13,6 +17,8 @@ def f2_show_website_file_name(target_website):
     if htmlfile.status_code == 200:
         soup = bs4.BeautifulSoup(htmlfile.text, 'lxml')
         print(soup.h2.text)
+        # 希望顯示名字後發出聲音
+        winsound.Beep(freq, duration)
     else:
         print("error!")
 
@@ -39,7 +45,7 @@ def f1_copy_website(copy_list):
         elif "wnacg" in pyperclip.paste():
             copy_list.append(pyperclip.paste())
             print(pyperclip.paste(), "加入列表")
-            # 將最新加入的網址資訊顯示
+            # 將最新加入的網址資訊顯示出來
             f2_show_website_file_name(copy_list[-1])
         time.sleep(0.1)
         # print(ten_second_after-datetime.datetime.now())

@@ -8,6 +8,8 @@ import bs4
 import winsound
 
 # 提示聲音的函數
+
+
 def beep_sound():
     import winsound
     # duration = 300  # millisecond
@@ -16,7 +18,7 @@ def beep_sound():
     winsound.PlaySound("SystemAsterisk", winsound.SND_ALIAS)
 
 
-def f2_show_website_file_name(target_website):
+def f2_show_website_file_name(target_website, target_website_dict):
     # 顯示在copy_list的檔案名稱
     htmlfile = requests.get(target_website)
     if htmlfile.status_code == 200:
@@ -24,11 +26,12 @@ def f2_show_website_file_name(target_website):
         print(soup.h2.text)
         # 希望顯示名字後發出聲音
         beep_sound()
+        target_website_dict[soup.h2.text] = soup
     else:
         print("error!")
 
 
-def f1_copy_website(copy_list):
+def f1_copy_website(copy_list, target_website_dict):
     """預計設定成無限迴圈但是想不出好的break條件"""
     """目前先設計成跑10秒"""
     # 紀錄複製的網址
@@ -51,7 +54,7 @@ def f1_copy_website(copy_list):
             copy_list.append(pyperclip.paste())
             # print(pyperclip.paste(), "加入列表")
             # 將最新加入的網址資訊顯示出來
-            f2_show_website_file_name(copy_list[-1])
+            f2_show_website_file_name(copy_list[-1], target_website_dict)
         time.sleep(0.1)
         # print(ten_second_after-datetime.datetime.now())
     # 當函數結束時顯示字串
@@ -61,7 +64,13 @@ def f1_copy_website(copy_list):
 
 # global copy_list
 target_website = list()
-f1_copy_website(target_website)
+target_website_dict = dict()
+# 將request後的頁面soup存成dict
+f1_copy_website(target_website, target_website_dict)
+for key, value in target_website_dict.items():
+    print("\n檔案名稱：", key)
+    print(len(value))
+    # print(value)
 # print(target_website)
 
 

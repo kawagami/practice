@@ -1,5 +1,6 @@
 #! python3
 
+# 考慮到輸入為負數、浮點數的狀況 所以套上abs()、float()
 n = int(abs(float(input("請輸入正整數\n"))))
 
 print("您輸入的n是", n, "\n")
@@ -11,11 +12,13 @@ Fibonacci[1] = 1
 
 def MathFunction(order):
     for i in range(order):
-        Fibonacci[i+2] = Fibonacci[i]+Fibonacci[i+1]
-        print("Fibonacci[", i+2, "]", "is", Fibonacci[i+2])
+        # 因為起始為0 所以左項設為i+2
+        Fibonacci[i+2] = Fibonacci[i+1]+Fibonacci[i]
         if i+2 == order:
-            print(Fibonacci[i+2])
+            print("序列", i+2, "的斐波那契數是", format(Fibonacci[i+2], ","))
             break
+        # # 顯示從第0項到第n-1項的數列
+        # print("Fibonacci[", i+2, "]", "is", format(Fibonacci[i+2], ","))
 
 
 MathFunction(n)

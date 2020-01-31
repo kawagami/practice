@@ -11,14 +11,20 @@ Fibonacci[1] = 1
 
 
 def MathFunction(order):
-    for i in range(order):
-        # 因為起始為0 所以左項設為i+2
-        Fibonacci[i+2] = Fibonacci[i+1]+Fibonacci[i]
-        if i+2 == order:
-            print("序列", i+2, "的斐波那契數是", format(Fibonacci[i+2], ","))
-            break
-        # # 顯示從第0項到第n-1項的數列
-        # print("Fibonacci[", i+2, "]", "is", format(Fibonacci[i+2], ","))
+    if order == 0:
+        print("序列", order, "的斐波那契數是", Fibonacci[order], ",")
+    elif order == 1:
+        print("序列", order, "的斐波那契數是", Fibonacci[order], ",")
+    else:
+        for i in range(order):
+
+            # 因為起始為0 所以左項設為i+2
+            Fibonacci[i+2] = Fibonacci[i+1]+Fibonacci[i]
+            if i+2 == order:
+                print("序列", i+2, "的斐波那契數是", format(Fibonacci[i+2], ","))
+                break
+            # # 顯示從第0項到第n-1項的數列
+            # print("Fibonacci[", i+2, "]", "is", format(Fibonacci[i+2], ","))
 
 
 MathFunction(n)

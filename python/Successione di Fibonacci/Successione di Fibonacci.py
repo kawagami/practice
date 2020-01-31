@@ -12,6 +12,7 @@ Fibonacci[1] = 1
 def MathFunction(order):
     for i in range(order):
         Fibonacci[i+2] = Fibonacci[i]+Fibonacci[i+1]
+        print("Fibonacci[", i+2, "]", "is", Fibonacci[i+2])
         if i+2 == order:
             print(Fibonacci[i+2])
             break

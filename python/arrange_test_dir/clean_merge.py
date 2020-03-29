@@ -45,7 +45,7 @@ def Achive_Folder_To_ZIP(sFilePath):
     # zf = zipfile.ZipFile(sFilePath + '.ZIP', mode = 'w', compression = zipfile.ZIP_DEFLATED)#預設的壓縮模式
     os.chdir(sFilePath)
     # print sFilePath
-    for root, folders, files in os.walk(".\\"):
+    for root, _, files in os.walk(".\\"):
         for sfile in files:
             aFile = os.path.join(root, sfile)
             # print aFile

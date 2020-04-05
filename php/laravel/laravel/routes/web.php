@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('frontend.welcome', ['name' => '大帥哥']);
+    return view('frontend.index', ['name' => '大帥哥']);
 });
 
 Route::get('/todo','TodoController@index');
